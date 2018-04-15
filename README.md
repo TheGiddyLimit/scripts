@@ -1,2 +1,2 @@
-# scripts
-Assorted garbage.
+# Scripts
+Assorted garbage and hacks.

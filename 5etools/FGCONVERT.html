@@ -1,0 +1,112 @@
+<script type="text/javascript" src="lib/jquery.js"></script>
+
+<!-- 40/40 for full 1080p hd -->
+<textarea id="in" cols="130" rows="19" placeholder="FG XML in"></textarea>
+<textarea id="in2" cols="30" rows="19" placeholder="Table/Entry In"></textarea>
+
+<textarea id="out" cols="130" rows="19"></textarea>
+<textarea id="out2" cols="30" rows="19"></textarea>
+
+<script>
+	window.onload = () => {
+		const $in = $(`#in`);
+		const $out = $(`#out`);
+
+		$in.on("keypress", (e) => {
+			if (e.key === "Enter") {
+				e.stopPropagation();
+				e.preventDefault();
+
+				const inn = $in.val()
+					.replace(/<b>/g, "{@b ")
+					.replace(/<\/b>/g, "}")
+					.replace(/<i>/g, "{@i ")
+					.replace(/<\/i>/g, "}")
+
+
+
+				const $it = $(inn);
+				const tbls = $it.find("table").clone();
+				$it.find("table").remove();
+				let outT = $it.not("table").find("*").prepend("&quot;").append("&quot;,\n").text();
+				outT = outT.replace(/"",\n/g, "");
+				outT = outT.trim().slice(0, outT.length-2);
+
+				function remTrailingDot (s) {
+					return s.replace(/^(.*?)\.(\s*)$/, (m0, m1, m2) => {
+						return m1+m2;
+					})
+				}
+
+				outT = outT.replace(/"({@b {@i (.*?)}})(.*?)"/g, (m0, m1, m2, m3) => {
+					return `{\n"type": "entries",\n"name": "${remTrailingDot(m2)}",\n"entries": [\n"${m3}"\n]\n}`
+				});
+
+				if (tbls.length) {
+					tbls.each((i, t) => {
+						const $t = $(t);
+
+						const out = {
+							"type": "table",
+							"caption": "",
+							"colLabels": [
+
+							],
+							"colStyles": [
+								"col-xs-6",
+								"col-xs-6"
+							],
+							"rows": [
+
+							]
+						}
+
+						const h = $t.find(`tr[decoration="underline"]`);
+						if (h) {
+							out.colLabels = h.find(`td`).map((i, e) => {
+								return $(e).text().replace(/{@b /g, "").replace(/}/g, "");
+							}).get();
+						} else delete out.colLabels
+
+						const rs = $t.find(`tr[decoration!="underline"]`);
+						rs.each((i, r) => {
+							out.rows.push(
+								$(r).find(`td`).map((i, e) => {
+									return $(e).text();
+								}).get()
+							)
+						})
+
+						outT += ",\n" + JSON.stringify(out, null, "\t");
+					})
+				}
+
+				$out.val(outT);
+			}
+		});
+
+		const $in2 = $(`#in2`);
+		const $out2 = $(`#out2`);
+		$in2.on("keypress", (e) => {
+			if (e.key === "Enter") {
+				e.stopPropagation();
+				e.preventDefault();
+
+				const [title, ...stuff] = JSON.parse("[" + $in2.val().trim().replace(/,$/, "") + "]");
+				const cleanTitle = title.replace(/({@b |})/g, "");
+				if (typeof stuff[0] === "object" && stuff[0].type === "table") {
+					stuff[0].caption = cleanTitle;
+					$out2.val(JSON.stringify(stuff[0], null, "\t"));
+				} else {
+					const out = {
+						type: "entries",
+						name: cleanTitle,
+						entries: stuff.map(it => it.trim())
+					};
+
+					$out2.val(JSON.stringify(out, null, "\t"));
+				}
+			}
+		});
+	}
+</script>
