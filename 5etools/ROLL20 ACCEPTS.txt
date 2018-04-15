@@ -1,0 +1,63 @@
+ROLL20 SPELLS URL STYLE
+https://app.roll20.net/compendium/dnd5e/Spells%3AFireball.json?plaintext=true
+GO BACK AND RESORE ALL THE OLD STUFF IN SPELLS? __TURNS OUT WE NEEDED THAT__
+
+https://github.com/Roll20/roll20-character-sheets/blob/master/5th%20Edition%20OGL%20by%20Roll20/5th%20Edition%20OGL%20by%20Roll20.html
+
+<!-- COMPENDIUM DROP CATCHERS -->
+<input type="hidden" name="attr_drop_category" accept="Category">
+<input type="hidden" name="attr_drop_name" accept="Name">
+<input type="hidden" name="attr_drop_weight" accept="Weight">
+<input type="hidden" name="attr_drop_properties" accept="Properties">
+<input type="hidden" name="attr_drop_modifiers" accept="Modifiers">
+<input type="hidden" name="attr_drop_content" accept="Content">
+<input type="hidden" name="attr_drop_itemtype" accept="Item Type">
+<input type="hidden" name="attr_drop_damage" accept="Damage">
+<input type="hidden" name="attr_drop_damagetype" accept="Damage Type">
+<input type="hidden" name="attr_drop_range" accept="Range">
+<input type="hidden" name="attr_drop_ac" accept="AC">
+
+<input type="hidden" name="attr_drop_attack_type" accept="Spell Attack">
+<input type="hidden" name="attr_drop_damage2" accept="Secondary Damage">
+<input type="hidden" name="attr_drop_damagetype2" accept="Secondary Damage Type">
+<input type="hidden" name="attr_drop_spellritualflag" accept="Ritual">
+<input type="hidden" name="attr_drop_spellschool" accept="School">
+<input type="hidden" name="attr_drop_spellcastingtime" accept="Casting Time">
+<input type="hidden" name="attr_drop_spelltarget" accept="Target">
+<input type="hidden" name="attr_drop_spellcomp" accept="Components">
+<input type="hidden" name="attr_drop_spellcomp_materials" accept="Material">
+<input type="hidden" name="attr_drop_spellconcentrationflag" accept="Concentration">
+<input type="hidden" name="attr_drop_spellduration" accept="Duration">
+<input type="hidden" name="attr_drop_spellhealing" accept="Healing">
+<input type="hidden" name="attr_drop_spelldmgmod" accept="Add Casting Modifier">
+<input type="hidden" name="attr_drop_spellsave" accept="Save">
+<input type="hidden" name="attr_drop_spellsavesuccess" accept="Save Success">
+<input type="hidden" name="attr_drop_spellhldie" accept="Higher Spell Slot Dice">
+<input type="hidden" name="attr_drop_spellhldietype" accept="Higher Spell Slot Die">
+<input type="hidden" name="attr_drop_spellhlbonus" accept="Higher Spell Slot Bonus">
+<input type="hidden" name="attr_drop_spelllevel" accept="Level">
+<input type="hidden" name="attr_drop_spell_damage_progression" accept="Damage Progression">
+
+<input type="hidden" name="attr_drop_speed" accept="Speed">
+<input type="hidden" name="attr_drop_str" accept="STR">
+<input type="hidden" name="attr_drop_dex" accept="DEX">
+<input type="hidden" name="attr_drop_con" accept="CON">
+<input type="hidden" name="attr_drop_int" accept="INT">
+<input type="hidden" name="attr_drop_wis" accept="WIS">
+<input type="hidden" name="attr_drop_cha" accept="CHA">
+<input type="hidden" name="attr_drop_vulnerabilities" accept="Vulnerabilities">
+<input type="hidden" name="attr_drop_resistances" accept="Resistances">
+<input type="hidden" name="attr_drop_immunities" accept="Immunities">
+<input type="hidden" name="attr_drop_condition_immunities" accept="Condition Immunities">
+<input type="hidden" name="attr_drop_languages" accept="Languages">
+<input type="hidden" name="attr_drop_challenge_rating" accept="Challenge Rating">
+
+<input type="hidden" name="attr_drop_size" accept="Size">
+<input type="hidden" name="attr_drop_type" accept="Type">
+<input type="hidden" name="attr_drop_alignment" accept="Alignment">
+<input type="hidden" name="attr_drop_hp" accept="HP">
+<input type="hidden" name="attr_drop_saving_throws" accept="Saving Throws">
+<input type="hidden" name="attr_drop_senses" accept="Senses">
+<input type="hidden" name="attr_drop_passive_perception" accept="Passive Perception">
+<input type="hidden" name="attr_drop_skills" accept="Skills">
+<input type="hidden" name="attr_drop_token_size" accept="Token Size">

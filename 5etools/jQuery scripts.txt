@@ -1,0 +1,36 @@
+TO RIP ROLL 20 TOKENS:
+-set the "Monsters" folder or w/e to have the id "torip", then in the console:
+
+let saveContent = function (fileUrl, fileName) {window.URL = window.URL || window.webkitURL; let xhr = new XMLHttpRequest(), a = document.createElement('a'), file; xhr.open('GET', fileUrl, true); xhr.responseType = 'blob'; xhr.onload = function () {     file = new Blob([xhr.response], { type : 'application/octet-stream' });     a.href = window.URL.createObjectURL(file);     a.download = fileName;   a.click(); }; xhr.send();}
+
+$("#torip .character").each(function(){let dicks = $(this); saveContent(dicks.find("div.token img").attr("src").replace("mini.png", "max.png"), dicks.find("div .namecontainer").html().trim()+".png")})
+
+
+~~ALTERNATELY~~
+d20.Campaign.characters.forEach((it) => {
+    const n = it.view.model.get("name");
+    it.view.model._getLatestBlob("defaulttoken", (t) => {
+        const url = JSON.parse(t).imgsrc;
+        const cleanUrl = url.replace(/thumb\.png/, "max.png");
+        saveContent(cleanUrl, n + ".png");
+    });
+})
+
+==========
+
+TO STEAL PAGE NUMBERS FROM KFC:
+copy(JSON.stringify($(`#ripme`).find("tbody").find("tr").map((i, ele) => {
+	return {"name": $(ele).find(".monster-table--name").html(), "source": $(ele).find(".monster-table--sources").not(".ng-hide").find(".monster-table--source-name__short").text() + " " + $(ele).find(".monster-table--sources").not(".ng-hide").first().find("[ng-if='source.page']").first().text()};
+}).get(), null, "\t"))
+
+
+
+==============
+EXPORT TITLES FROM ADVENTURES
+
+// TODO: filter with regex, to avoid e.g. "18A. Stuff"
+
+JSON.stringify($(`span.entry-title`).filter((i, e) => {
+return /^\d+\. .*?$/.exec(e.innerHTML) !== null
+}).map((i, e) => e.innerHTML).get(), null, "\t")
+

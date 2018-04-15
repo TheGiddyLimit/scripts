@@ -1,0 +1,24 @@
+// STICK THIS IN onAdventureLoad in adventures.js; in the if (curRender.chapter !== chapter || curRender.curAdvId !== advId) { block
+
+// FIXME remove check links
+$(`a[data-adventure=${advId}]`).filter(`[data-chapter=${chapter}]`).filter(`[data-header]`).each((i, e) => {
+    const $e = $(e);
+
+    const sc = $e.data("header")
+    const selectors = [
+        `div.statsBlockSectionHead > span.entry-title:textEquals("${sc}")`,
+        `div.statsBlockHead > span.entry-title:textEquals("${sc}")`,
+        `div.statsBlockSubHead > span.entry-title:textEquals("${sc}")`,
+        `div.statsBlockInset > span.entry-title:textEquals("${sc}")`
+    ];
+    const goToSect = $(selectors[0]);
+    const goTo = $(selectors[1]);
+    const goToSub = $(selectors[2]);
+    const goToInset = $(selectors[3]);
+
+    if (goToSect.length || goTo.length || goToSub.length || goToInset.length) {
+
+    } else {
+        console.log("Not found", sc)
+    }
+})
