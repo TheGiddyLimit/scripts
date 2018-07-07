@@ -28,9 +28,25 @@ copy(JSON.stringify($(`#ripme`).find("tbody").find("tr").map((i, ele) => {
 ==============
 EXPORT TITLES FROM ADVENTURES
 
-// TODO: filter with regex, to avoid e.g. "18A. Stuff"
 
+JSON.stringify($(`span.entry-title`).filter((i, e) => {
+return $(e).parent(`.statsBlockHead`).length 
+}).map((i, e) => e.innerHTML).get(), null, "\t")
+
+
+// TODO: filter with regex, to avoid e.g. "18A. Stuff"
+// gets only numerical starts
 JSON.stringify($(`span.entry-title`).filter((i, e) => {
 return /^\d+\. .*?$/.exec(e.innerHTML) !== null
 }).map((i, e) => e.innerHTML).get(), null, "\t")
 
+====================
+GET LINKS FROM LIST
+
+copy(list.visibleItems.map(it => `{@race ${it._values.name}|${it._values.source}}`))
+
+===================
+IntelliJ FG dice expression converter:
+
+Find: \[(\d)d(\d+)(\s*([+-])\s*(\d+))?]
+Replace with: {@dice $1d$2$4$5}

@@ -1,0 +1,64 @@
+// CREATURES
+const OUT = {};
+let totalRemain = 0;
+
+totalRemain = (46 * 20) + 8; // there's 8 monsters on the last page
+for (let i = 1; i < 48; ++i) {
+    setTimeout(() => {
+        $.ajax({
+            url: `https://www.dndbeyond.com/monsters?page=${i}`,
+            success: (page) => {
+                const $page = $(page);
+                $page.find(`.row.monster-name`).find(`a`).each((i, e) => {
+                    $.ajax({
+                        url: e.href,
+                        success: (data) => {
+                            try {
+                                OUT[e.innerHTML] = /<source.*?src="(.*?)".*?>/.exec(data)[1];
+                            } catch (x) {
+                                console.log(`no audio source found for ${e.href}`)
+                            }
+                            totalRemain -= 1;
+                            if (totalRemain % 10 === 0) console.log(`${totalRemain} remaining...`)
+                        },
+                        error: () => {
+                            console.warn(`failed to grab ${e}`);
+                            totalRemain -= 1;
+                            if (totalRemain % 10 === 0) console.log(`${totalRemain} remaining...`)
+                        }
+                    })
+                })
+            },
+            error: () => {
+                console.warn(`failed to pull page ${i}`);
+                totalRemain -= 20;
+                console.log(`${totalRemain} remaining...`)
+            }
+        })
+    }, i * 3000)
+}
+
+// RACES
+OUT = {};
+totalRemain = 0;
+
+totalRemain = $(`.details-link`).length;
+$(`.details-link`).find(`a`).each((i, e) => {
+	$.ajax({
+		url: e.href,
+		success: (data) => {
+			try {
+				OUT[/View (.*?) Details/.exec($(e).find(`span`).html())[1].trim()] = /<source.*?src="(.*?)".*?>/.exec(data)[1];
+			} catch (x) {
+				console.log(`no audio source found for ${e.href}`)
+			}
+			totalRemain -= 1;
+			if (totalRemain % 10 === 0) console.log(`${totalRemain} remaining...`)
+		},
+		error: () => {
+			console.warn(`failed to grab ${e}`);
+			totalRemain -= 1;
+			if (totalRemain % 10 === 0) console.log(`${totalRemain} remaining...`)
+		}
+	})
+})
